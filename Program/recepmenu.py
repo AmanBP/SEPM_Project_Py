@@ -1,5 +1,6 @@
 import os
 from utilityfuncs import callpause,callclearscreen
+from userhandler import Register
 
 def ReceptionistMenu(CurrentUserName):
 
@@ -15,7 +16,7 @@ def ReceptionistMenu(CurrentUserName):
         choice = int(input("Choose an option:"))
 
         if(choice == 1):
-            #Register(2)
+            Register(2)
             pass
 
         elif(choice == 2):

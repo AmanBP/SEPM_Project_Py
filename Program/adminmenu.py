@@ -1,5 +1,6 @@
 import os
 from utilityfuncs import callclearscreen,callpause
+from userhandler import UserHandler
 
 def AdminMenu(CurrentUserName):
     
@@ -26,8 +27,7 @@ def AdminMenu(CurrentUserName):
             pass
         
         elif(choice == 3):
-            #UsersMenu()
-            pass
+            UserHandler()
 
         elif(choice == 4):
             #TransLogs(CurrentUserName)

@@ -21,3 +21,6 @@ def DD(a:str,b:str,c:int):
 	print("UserName  : {}".format(a))
 	print("Password  : {}".format(b))
 	print("User Type : {}".format(c))
+
+def MenuHeaderPrinter(title : str):
+	print(title.center(80,'-'))
