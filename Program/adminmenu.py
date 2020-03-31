@@ -1,6 +1,7 @@
 import os
 from utilityfuncs import callclearscreen,callpause
 from userhandler import UserHandler
+from complainthandler import ComplaintHandler
 
 def AdminMenu(CurrentUserName):
     
@@ -38,8 +39,7 @@ def AdminMenu(CurrentUserName):
             pass
 
         elif(choice == 6):
-            #ComplaintHandler()
-            pass
+            ComplaintHandler()
 
         elif(choice == 7):
             print("Logging Out.")
