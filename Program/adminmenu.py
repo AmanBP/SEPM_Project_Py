@@ -2,6 +2,7 @@ import os
 from utilityfuncs import callclearscreen,callpause
 from userhandler import UserHandler
 from complainthandler import ComplaintHandler
+from attendance import AttendanceHandler
 
 def AdminMenu(CurrentUserName):
     
@@ -20,8 +21,7 @@ def AdminMenu(CurrentUserName):
         choice = int(input("Choose an option:"))
         
         if(choice == 1):
-            #AttendanceHandler()
-            pass
+            AttendanceHandler()
 
         elif(choice == 2):
             #RateHandler()
