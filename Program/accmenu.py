@@ -1,5 +1,6 @@
-import os
 from utilityfuncs import callclearscreen,callpause
+from ratehandler import VRates
+
 def AccountantMenu(CurrentUserName):
 
     breakaccmenu = 1
@@ -18,8 +19,7 @@ def AccountantMenu(CurrentUserName):
             pass
 
         elif(choice == 2):
-            #Vrates()
-            pass
+            VRates()
 
         elif(choice == 3):
             #MakeComplaint()

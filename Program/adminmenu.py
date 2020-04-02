@@ -3,6 +3,7 @@ from utilityfuncs import callclearscreen,callpause
 from userhandler import UserHandler
 from complainthandler import ComplaintHandler
 from attendance import AttendanceHandler
+from ratehandler import RateHandler
 
 def AdminMenu(CurrentUserName):
     
@@ -24,7 +25,7 @@ def AdminMenu(CurrentUserName):
             AttendanceHandler()
 
         elif(choice == 2):
-            #RateHandler()
+            RateHandler()
             pass
         
         elif(choice == 3):
