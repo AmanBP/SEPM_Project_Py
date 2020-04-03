@@ -1,4 +1,5 @@
 import os
+from backuputility import Backup
 from utilityfuncs import callclearscreen,callpause
 from userhandler import UserHandler
 from complainthandler import ComplaintHandler
@@ -36,7 +37,7 @@ def AdminMenu(CurrentUserName):
             pass
 
         elif(choice == 5):
-            #Backup()
+            Backup()
             pass
 
         elif(choice == 6):
@@ -45,7 +46,7 @@ def AdminMenu(CurrentUserName):
         elif(choice == 7):
             print("Logging Out.")
             breakadminmenu = 0
-        
+    
         else:
             print("\nWrong Choice! Please choose a correct option:")
             callpause()
