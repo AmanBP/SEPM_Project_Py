@@ -1,5 +1,7 @@
 from utilityfuncs import callclearscreen,callpause
 from ratehandler import VRates
+from complainthandler import MakeComp
+from transhandler import TransHandler
 
 def AccountantMenu(CurrentUserName):
 
@@ -15,15 +17,14 @@ def AccountantMenu(CurrentUserName):
         choice = int(input("Choose an option:"))
 
         if(choice == 1):
-            #TransactionHandler(CurrentUserName)
-            pass
+            TransHandler(CurrentUserName)
 
         elif(choice == 2):
             VRates()
+            callpause()
 
         elif(choice == 3):
-            #MakeComplaint()
-            pass
+            MakeComp()
         
         elif(choice == 4):
             breakaccmenu = 0

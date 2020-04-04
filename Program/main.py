@@ -2,6 +2,7 @@ from utilityfuncs import encryptDecrypt,callclearscreen,callpause
 from prettytable import PrettyTable
 from adminmenu import AdminMenu
 from accmenu import AccountantMenu
+from recepmenu import ReceptionistMenu
 import sqlite3
 import os
 import getpass
@@ -68,10 +69,8 @@ def main():
 
                                 elif (row[2] == 3):
 
-                                    #AdminMenu(Uname)
                                     sqlite3conn.close()
-                                    print("In Reception Menu")
-                                    callpause()
+                                    ReceptionistMenu(Uname)
                                     breakpassloop = 0
                                     breakusernameinput = 0
 

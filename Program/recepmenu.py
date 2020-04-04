@@ -1,6 +1,8 @@
 import os
 from utilityfuncs import callpause,callclearscreen
 from userhandler import Register
+from complainthandler import MakeComp
+from transhandler import EnterFunds
 
 def ReceptionistMenu(CurrentUserName):
 
@@ -17,15 +19,12 @@ def ReceptionistMenu(CurrentUserName):
 
         if(choice == 1):
             Register(2)
-            pass
 
         elif(choice == 2):
-            #Fees(CurrentUserName)
-            pass
+            EnterFunds(CurrentUserName)
 
         elif(choice == 3):
-            #MakeComp()
-            pass
+            MakeComp()
         
         elif(choice == 4):
             breakrecepmenu = 0

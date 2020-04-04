@@ -1,10 +1,11 @@
 import os
 from backuputility import Backup
-from utilityfuncs import callclearscreen,callpause
+from utilityfuncs import callclearscreen,callpause,MenuHeaderPrinter
 from userhandler import UserHandler
 from complainthandler import ComplaintHandler
 from attendance import AttendanceHandler
 from ratehandler import RateHandler
+from transhandler import TransLogs
 
 def AdminMenu(CurrentUserName):
     
@@ -12,7 +13,7 @@ def AdminMenu(CurrentUserName):
     while(breakadminmenu):
 
         callclearscreen()
-        print("Admin & Owner Menu".center(80,'-'))
+        MenuHeaderPrinter("Admin & Owner Menu")
         print("1. Attendance Menu")
         print("2. Rates Menu")
         print("3. Users Menu")
@@ -27,18 +28,15 @@ def AdminMenu(CurrentUserName):
 
         elif(choice == 2):
             RateHandler()
-            pass
         
         elif(choice == 3):
             UserHandler()
 
         elif(choice == 4):
-            #TransLogs(CurrentUserName)
-            pass
+            TransLogs()
 
         elif(choice == 5):
             Backup()
-            pass
 
         elif(choice == 6):
             ComplaintHandler()

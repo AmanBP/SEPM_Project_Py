@@ -18,7 +18,7 @@ def VRates():
         print(x)
         print()
     conn.close()
-
+    return
 
 def CRates():
     VRates()
@@ -87,4 +87,5 @@ def RateHandler():
         else:
             print("Wrong Choice, Please choose a correct option:")
             callpause()
+    return
     
