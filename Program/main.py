@@ -3,6 +3,7 @@ from prettytable import PrettyTable
 from adminmenu import AdminMenu
 from accmenu import AccountantMenu
 from recepmenu import ReceptionistMenu
+from gymstaffhandler import Gym_Staff_Menu
 import sqlite3
 import os
 import getpass
@@ -76,10 +77,8 @@ def main():
 
                                 elif (row[2] == 4):
 
-                                    #AdminMenu(Uname)
                                     sqlite3conn.close()
-                                    print("In Gym Staff Menu")
-                                    callpause()
+                                    Gym_Staff_Menu(Uname)
                                     breakpassloop = 0
                                     breakusernameinput = 0
 

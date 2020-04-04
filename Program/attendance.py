@@ -10,6 +10,24 @@ def getproperdate(somedatestring):
             newdate += i
     return newdate
 
+def AttendanceCheck(uid):
+    conn = sqlite3.connect("../Data/maindatabase.db")
+    c = conn.cursor()
+    datelist = []
+    count = 0
+    command = '''SELECT name FROM sqlite_master WHERE type='table' AND name LIKE 'date_%';'''
+    for row in c.execute(command):
+        datelist.append(str(row[0]))
+        count += 1
+    for i in range(count):
+        print("Attendace of : {}".format(datelist[i][5:]))
+        command = "SELECT * FROM " + datelist[i] + ''' WHERE ID="{}"'''.format(uid) + ";"
+        c.execute(command)
+        x = from_db_cursor(c)
+        print(x)
+    conn.close()
+    callpause()
+    
 def createdatetable(date):
     properdate = getproperdate(date)
     command = "CREATE TABLE date_" + properdate + "(ID varchar(100),Attendance CHARACTER(1));"
