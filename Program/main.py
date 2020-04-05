@@ -4,6 +4,7 @@ from adminmenu import AdminMenu
 from accmenu import AccountantMenu
 from recepmenu import ReceptionistMenu
 from gymstaffhandler import Gym_Staff_Menu
+from gymuserhandler import gym_user_menu
 import sqlite3
 import os
 import getpass
@@ -84,15 +85,10 @@ def main():
 
                                 elif (row[2] == 5):
 
-                                    #AdminMenu(Uname)
                                     sqlite3conn.close()
-                                    print("In Gym User Menu")
-                                    callpause()
+                                    gym_user_menu()
                                     breakpassloop = 0
                                     breakusernameinput = 0
-
-
-                                #Need to check database locks once menus are implemented.
 
                             else:
 
