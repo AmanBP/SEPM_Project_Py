@@ -4,6 +4,24 @@ from utilityfuncs import *
 import getpass
 from prettytable import PrettyTable
 
+def newAdminReg():
+    print("Registering Admin for the first run:")
+    uname = input("Enter a username:")
+    print("\nEnter a Password:")
+    password = getpass.getpass()
+    print("\n\nYou have entered the following data (password is encrypted):")
+    DD(uname,encryptDecrypt(password),1)
+    print("\nWriting data to database, Please Wait.....")
+    conn = sqlite3.connect("./Data/maindatabase.db")
+    c = conn.cursor()
+    values = (encryptDecrypt(uname),encryptDecrypt(password),1)
+    c.execute("INSERT INTO User_List VALUES(?,?,?)",values)
+    conn.commit()
+    conn.close()
+    print("\nDone sending values to database.")
+    print("Heading back to previous menu")
+    callpause()
+    return
 
 def Register(x:int):
 
@@ -14,7 +32,7 @@ def Register(x:int):
     while(gotuname):
         
         uname = input("Enter a username:")
-        conn = sqlite3.connect("../Data/maindatabase.db")
+        conn = sqlite3.connect("./Data/maindatabase.db")
         c = conn.cursor()
         found = 0
         for row in c.execute("SELECT username FROM User_List"):
@@ -62,7 +80,7 @@ def Register(x:int):
     else:
         DD(uname,encryptDecrypt(password),(typechoice-3))
     print("\nWriting data to database, Please Wait.....")
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("./Data/maindatabase.db")
     c = conn.cursor()
     values = (encryptDecrypt(uname),encryptDecrypt(password),typechoice)
     c.execute("INSERT INTO User_List VALUES(?,?,?)",values)
@@ -79,7 +97,7 @@ def ListUsers():
     x = PrettyTable()
     x.field_names = ["Username","User Type"]
     usertypelist = ["Admin/Owner","Accountant","Receptionist","Gym Staff","Gym User"]
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("./Data/maindatabase.db")
     c = conn.cursor()
     print("Current Users found are: ")
     for row in c.execute("SELECT username,usertype FROM User_List"):
@@ -93,7 +111,7 @@ def ListUsers():
 def DelUser():
 
     uname = str(input("Enter a Username to delete:"))
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("./Data/maindatabase.db")
     c = conn.cursor()
     found = 0
     for row in c.execute("SELECT username FROM User_List;"):

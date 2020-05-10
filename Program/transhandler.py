@@ -8,7 +8,7 @@ def GetCurrentTime():
     return now.strftime("%H:%M:%S , %d/%m/%Y")
 
 def EnterintoLogs(values):
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("./Data/maindatabase.db")
     c = conn.cursor()
     c.execute('''INSERT INTO Transaction_Log VALUES(?,?,?,?,?)''',values)
     conn.commit()
@@ -54,7 +54,7 @@ def TakeFunds(uid):
 
 def TransLogs():
     print("Current Transaction Logs are:")
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("./Data/maindatabase.db")
     c = conn.cursor()
     c.execute("SELECT * FROM Transaction_Log")
     x = pt.from_db_cursor(c)
@@ -62,7 +62,7 @@ def TransLogs():
     callpause()
 
 def ViewFunds(mode):
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("./Data/maindatabase.db")
     c = conn.cursor()
     balance = 0
     for row in c.execute("SELECT operation,amount FROM Transaction_Log"):

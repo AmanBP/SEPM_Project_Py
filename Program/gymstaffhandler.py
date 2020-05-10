@@ -5,7 +5,7 @@ from prettytable import from_db_cursor
 import sqlite3
 
 def CheckEquipmentDetails():
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("./Data/maindatabase.db")
     command = "SELECT * FROM Equipment"
     c = conn.cursor()
     c.execute(command)

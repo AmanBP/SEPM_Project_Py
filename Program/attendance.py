@@ -11,7 +11,7 @@ def getproperdate(somedatestring):
     return newdate
 
 def AttendanceCheck(uid):
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("./Data/maindatabase.db")
     c = conn.cursor()
     datelist = []
     count = 0
@@ -31,7 +31,7 @@ def AttendanceCheck(uid):
 def createdatetable(date):
     properdate = getproperdate(date)
     command = "CREATE TABLE date_" + properdate + "(ID varchar(100),Attendance CHARACTER(1));"
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("./Data/maindatabase.db")
     c = conn.cursor()
     c.execute(command)
     print("Entry Successfully Created.")
@@ -41,7 +41,7 @@ def createdatetable(date):
 def insertintodatetable(date,id,pora):
     properdate = getproperdate(date)
     command = "INSERT INTO date_" + properdate + " VALUES(\"" + str(id) + "\",\"" + str(pora) + "\");"
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("./Data/maindatabase.db")
     c = conn.cursor()
     c.execute(command)
     print("Succesfully Entered Attendance!")
@@ -51,25 +51,20 @@ def insertintodatetable(date,id,pora):
 def checkifdatetableexists(date):
     properdate = getproperdate(date)
     command = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='date_" + properdate + "';"
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("./Data/maindatabase.db")
     c = conn.cursor()
     c.execute(command)
     value = c.fetchone()
-    found = 0
-    if(value[0] == 0):
-        found = 0 
-    else:
-        found = 1
     conn.close()
-    if(found == 0):
-        return 0
+    if(value[0] == 0):
+        return 0 
     else:
         return 1
 
 def getattendanceofdate(date):
     properdate = getproperdate(date)
     command = "SELECT * FROM date_" + properdate + ";"
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("./Data/maindatabase.db")
     c = conn.cursor()
     c.execute(command)
     x = from_db_cursor(c)
@@ -119,7 +114,7 @@ def AttendanceHandler():
                     while(tryagainuname):
                         uname = input("Please enter a username to enter attendance of:")
                         command = "SELECT username FROM User_List;"
-                        conn = sqlite3.connect("../Data/maindatabase.db")
+                        conn = sqlite3.connect("./Data/maindatabase.db")
                         c = conn.cursor()
                         found = 0
                         for row in c.execute(command):
