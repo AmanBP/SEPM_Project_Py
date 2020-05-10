@@ -1,4 +1,4 @@
-from utilityfuncs import encryptDecrypt,callclearscreen,callpause
+from utilityfuncs import *
 from prettytable import PrettyTable
 from adminmenu import AdminMenu
 from accmenu import AccountantMenu
@@ -6,6 +6,7 @@ from recepmenu import ReceptionistMenu
 from gymstaffhandler import Gym_Staff_Menu
 from gymuserhandler import gym_user_menu
 from userhandler import newAdminReg
+from pathlib import Path
 import sqlite3
 import os
 import getpass
@@ -22,7 +23,10 @@ def main():
         choice = int(input("Choose an option:"))
         if(choice==1):
             breakusernameinput = 1
-            sqlite3conn = sqlite3.connect('./Data/maindatabase.db')
+
+            dbfilepath = getdbpath()
+            sqlite3conn = sqlite3.connect(dbfilepath)
+            # sqlite3conn = sqlite3.connect('./Data/maindatabase.db')
             sqlite3cursor = sqlite3conn.cursor()
             sqlite3cursor.execute("SELECT count(*) FROM User_List")
             value = sqlite3cursor.fetchall()
