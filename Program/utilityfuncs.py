@@ -23,3 +23,9 @@ def DD(a:str,b:str,c:int):
 
 def MenuHeaderPrinter(title : str):
 	print(title.center(80,'-'))
+
+class WrongChoiceError(Exception):
+    pass
+
+class BreakMenu(Exception):
+    pass

@@ -1,5 +1,5 @@
 import sqlite3
-from utilityfuncs import MenuHeaderPrinter,callclearscreen,callpause
+from utilityfuncs import *
 from prettytable import from_db_cursor
 
 def VRates():
@@ -65,27 +65,37 @@ def CRates():
     return
 
 def RateHandler():
-    breakrateloop = 0
-    while(not breakrateloop):
-        callclearscreen()
-        MenuHeaderPrinter("Rates Menu")
-        print("1. View Rates")
-        print("2. Change Rates")
-        print("3. Go Back")
-        choice = int(input("Choose an option:"))
+    while(True):
+        try:
+            callclearscreen()
+            MenuHeaderPrinter("Rates Menu")
+            print("1. View Rates")
+            print("2. Change Rates")
+            print("3. Go Back")
+            choice = int(input("Choose an option:"))
 
-        if(choice == 1):
-            VRates()
-            callpause()
+            if(choice == 1):
+                VRates()
+                callpause()
+
+            elif(choice == 2):
+                CRates()
+                callpause()
+
+            elif(choice == 3):
+                raise BreakMenu
             
-        elif(choice == 2):
-            CRates()
+            else:
+                raise WrongChoiceError
+
+        except BreakMenu:
+            break
+        
+        except WrongChoiceError:
+            print("Wrong Choice, Please choose a correct option!")
             callpause()
 
-        elif(choice == 3):
-            breakrateloop = 1
-        else:
-            print("Wrong Choice, Please choose a correct option:")
+        except ValueError:
+            print("Invalid Character has been entered!")
             callpause()
     return
-    

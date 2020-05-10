@@ -1,4 +1,4 @@
-from utilityfuncs import callclearscreen,callpause,MenuHeaderPrinter
+from utilityfuncs import *
 from datetime import datetime
 import sqlite3
 import prettytable as pt
@@ -80,34 +80,43 @@ def ViewFunds(mode):
 
 def TransHandler(uid):
 
-    breaktransmenu = 0
-    while(not breaktransmenu):
+    while(True):
+        try:
+            callclearscreen()
+            MenuHeaderPrinter("Transaction Menu")
+            print("1. Enter Funds")
+            print("2. Take Funds")
+            print("3. Check Transaction Logs")
+            print("4. View Current Balance")
+            print("5. Go Back")
+            choice = int(input("Choose an option:"))
 
-        callclearscreen()
-        MenuHeaderPrinter("Transaction Menu")
-        print("1. Enter Funds")
-        print("2. Take Funds")
-        print("3. Check Transaction Logs")
-        print("4. View Current Balance")
-        print("5. Go Back")
-        choice = int(input("Choose an option:"))
+            if(choice == 1):
+                EnterFunds(uid)
+
+            elif(choice == 2):
+                TakeFunds(uid)
+
+            elif(choice == 3):
+                TransLogs()
+
+            elif(choice == 4):
+                ViewFunds(1)
+
+            elif(choice == 5):
+                raise BreakMenu
+
+            else:
+                raise WrongChoiceError
+
+        except BreakMenu:
+            break
         
-        if(choice == 1):
-            EnterFunds(uid)
+        except WrongChoiceError:
+            print("Wrong Choice, Please choose a correct option!")
+            callpause()
 
-        elif(choice == 2):
-            TakeFunds(uid)
-        
-        elif(choice == 3):
-            TransLogs()
-    
-        elif(choice == 4):
-            ViewFunds(1)
-
-        elif(choice == 5):
-            breaktransmenu = 1
-
-        else:
-            print("\nWrong Choice! Please choose a correct option:")
+        except ValueError:
+            print("Invalid Character has been entered!")
             callpause()
     return

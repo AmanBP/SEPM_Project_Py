@@ -143,31 +143,39 @@ def DelUser():
 
 def UserHandler():
 
-    breakusermenu = 1
-    while(breakusermenu):
+    while(True):
+        try:
+            callclearscreen()
+            MenuHeaderPrinter("User's Menu")
+            print("1. Add a User")
+            print("2. List all Users")
+            print("3. Delete a User")
+            print("4. Back to previous menu")
+            choice = int(input("Choose an option:"))
 
-        callclearscreen()
-        MenuHeaderPrinter("User's Menu")
-        print("1. Add a User")
-        print("2. List all Users")
-        print("3. Delete a User")
-        print("4. Back to previous menu")
-        choice = int(input("Choose an option:"))
+            if(choice == 1):
+                Register(1)
 
-        if(choice == 1):
-            Register(1)
-            
-        elif(choice == 2):
-            ListUsers()
+            elif(choice == 2):
+                ListUsers()
 
-        elif(choice == 3):
-            DelUser()
+            elif(choice == 3):
+                DelUser()
+
+            elif(choice == 4):
+                raise BreakMenu
+
+            else:
+                raise WrongChoiceError
+
+        except BreakMenu:
+            break
         
-        elif(choice == 4):
-            breakusermenu = 0
-
-        else:
-            print("Wrong Choice, Please choose a correct option:")
+        except WrongChoiceError:
+            print("Wrong Choice, Please choose a correct option!")
             callpause()
-            
+
+        except ValueError:
+            print("Invalid Character has been entered!")
+            callpause()
     return
