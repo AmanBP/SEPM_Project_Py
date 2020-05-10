@@ -1,5 +1,4 @@
 import os
-import pathlib as pl
 def encryptDecrypt(input):
 	key = ['K', 'C', 'Q']
 	output = []
@@ -24,7 +23,3 @@ def DD(a:str,b:str,c:int):
 
 def MenuHeaderPrinter(title : str):
 	print(title.center(80,'-'))
-
-def getdbpath():
-	file = pl.WindowsPath("../Data/maindatabase.db")
-	return file
