@@ -1,10 +1,12 @@
-from utilityfuncs import encryptDecrypt,callclearscreen,callpause
+from utilityfuncs import *
 from prettytable import PrettyTable
 from adminmenu import AdminMenu
 from accmenu import AccountantMenu
 from recepmenu import ReceptionistMenu
 from gymstaffhandler import Gym_Staff_Menu
 from gymuserhandler import gym_user_menu
+from userhandler import newAdminReg
+import pathlib as pl
 import sqlite3
 import os
 import getpass
@@ -19,17 +21,41 @@ def main():
         print("1.Login")
         print("2.Exit")
         choice = int(input("Choose an option:"))
-
         if(choice==1):
-
             breakusernameinput = 1
 
-            while(breakusernameinput):
+            sqlite3conn = sqlite3.connect('Data/maindatabase.db')
+            sqlite3cursor = sqlite3conn.cursor()
+            sqlite3cursor.execute("SELECT count(*) FROM User_List")
+            value = sqlite3cursor.fetchall()
+            checkforadminid = False
+            gotproperchoice = False
+            if(value[0][0] == 0):
+                while(not gotproperchoice):
+                    yn = input("Looks like this is the first time this program is run,\nWould you like to create a new administrator cridential?(y/n):")
+                    if(yn == "y" or yn == "Y"):
+                        gotproperchoice = True
+                        newAdminReg()
+                        checkforadminid = True
+                    elif(yn == "N" or yn == "n"):
+                        sqlite3conn.close()
+                        gotproperchoice = True
+                        print("This Program cannot continue without atleast one Admin Cridential.\nExiting!")
+                        callpause()
+                        breakmainwhile = 0
+                    else:
+                        print("Wrong option Selected!")
+                        callpause()
+            else:
+                checkforadminid = True
+
+            while(breakusernameinput and checkforadminid):
+                if(gotproperchoice == True):
+                    print("Entering back into Login",end = ',')
+                    callpause()
 
                 callclearscreen()
                 Uname = str(input("Enter a Username:\n"))
-                sqlite3conn = sqlite3.connect('../Data/maindatabase.db')
-                sqlite3cursor = sqlite3conn.cursor()
                 found = 0
                 for row in sqlite3cursor.execute("SELECT * FROM User_List"):
                     
@@ -118,7 +144,6 @@ def main():
         elif (choice==2):
 
             print("\n" + " Exiting ".center(40,"!"))
-            callpause()
             breakmainwhile = 0
 
         else:

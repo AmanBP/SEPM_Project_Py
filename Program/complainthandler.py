@@ -4,7 +4,7 @@ from prettytable import from_db_cursor
 
 def MakeComp():
     cs = str(input("Please enter your complaint or suggestion:"))
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("Data/maindatabase.db")
     c = conn.cursor()
     c.execute("INSERT INTO CS VALUES(NULL,\"" + cs + "\")")
     print("The complaint / suggestion has been registered!")
@@ -14,7 +14,7 @@ def MakeComp():
 
 def ViewAllComp():
     statement = "SELECT * FROM CS"
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("Data/maindatabase.db")
     c = conn.cursor()
     c.execute(statement)
     x = from_db_cursor(c)
@@ -26,7 +26,7 @@ def ViewAllComp():
 
 def DeleteAComp():
     ViewAllComp()
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("Data/maindatabase.db")
     c = conn.cursor()
     cnum = int(input("Select ID number of complaint to be removed:"))
     gotconfirm = 1

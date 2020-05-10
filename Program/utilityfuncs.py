@@ -1,7 +1,6 @@
 import os
-
 def encryptDecrypt(input):
-	key = ['K', 'C', 'Q'] #Can be any chars, and any size array
+	key = ['K', 'C', 'Q']
 	output = []
 	
 	for i in range(len(input)):

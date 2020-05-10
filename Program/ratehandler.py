@@ -8,7 +8,7 @@ def VRates():
     columns = "Monthly,QuadAnnual,BiAnnual,Annual"
     command1 = "SELECT "
     command2 = " FROM "
-    conn = sqlite3.connect("../Data/maindatabase.db")
+    conn = sqlite3.connect("Data/maindatabase.db")
     c = conn.cursor()
     for i in range(0,3):
         command = command1 + columns + command2 + sections[i]
@@ -54,7 +54,7 @@ def CRates():
             return
         else:
             newvalue = int(input("Please enter a new rate for {} rate:".format(span[val])))
-            conn = sqlite3.connect("../Data/maindatabase.db")
+            conn = sqlite3.connect("Data/maindatabase.db")
             c = conn.cursor()
             statement = "UPDATE " + types[choice] + " SET " + span[val] + "=" + str(newvalue) + " WHERE ID=1;"
             c.execute(statement)
