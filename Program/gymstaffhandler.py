@@ -5,6 +5,11 @@ from prettytable import from_db_cursor
 import sqlite3
 
 def CheckEquipmentDetails():
+    '''
+    Check Equipment Details Function.\
+
+    Loads all values from Equipment Table and prints it using prettytable's table printing api.
+    '''
     conn = sqlite3.connect("Data/maindatabase.db")
     command = "SELECT * FROM Equipment"
     c = conn.cursor()
@@ -15,7 +20,9 @@ def CheckEquipmentDetails():
     callpause()
 
 def Gym_Staff_Menu(uid):
-
+    '''
+    Wrapper Function for Gym Staff Menu.
+    '''
     while(True):
 
         try:

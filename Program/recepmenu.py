@@ -6,7 +6,10 @@ from transhandler import EnterFunds
 import os
 
 def ReceptionistMenu(CurrentUserName):
-
+    '''
+    Wrapper Function for Receptionist Menu.
+    CurrentUserName is a string holding the de-encrypted username of the current user.
+    '''
     while(True):
         try:
             callclearscreen()

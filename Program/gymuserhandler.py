@@ -2,7 +2,9 @@ from utilityfuncs import *
 from complainthandler import MakeComp
 
 def gym_user_menu():
-
+    '''
+    Gym User Wrapper Function.
+    '''
     while(True):
         try:
             callclearscreen()

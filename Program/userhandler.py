@@ -5,6 +5,11 @@ import getpass
 from prettytable import PrettyTable
 
 def newAdminReg():
+    '''
+    Function only meant to register an admin user for the initial running of the program
+
+    Only executes when main function detects 0 users in the User_List database.
+    '''
     print("Registering Admin for the first run:")
     uname = input("Enter a username:")
     print("\nEnter a Password:")
@@ -24,7 +29,15 @@ def newAdminReg():
     return
 
 def Register(x:int):
+    '''
+    Register Function
 
+    x:int corresponds to the "mode of registeration"
+    if x = 1:
+        The register code treats the registeration as an admin registering into the system.
+    if x = 2:
+        The register code treats the registeration as a receptionist registering a member into the system.
+    '''
     print("REGISTER".center(80,'-'))
     print("Registeration has begun::")
 
@@ -93,7 +106,14 @@ def Register(x:int):
 
 
 def ListUsers():
+    '''
+    Function to list all users
 
+    Creates an SQLite3 connection to maindatabase.db file.
+    Queries for all users in the table User_List.
+    Creates a table using a prettytable object and adds the data.
+    Prints the created table.
+    '''
     x = PrettyTable()
     x.field_names = ["Username","User Type"]
     usertypelist = ["Admin/Owner","Accountant","Receptionist","Gym Staff","Gym User"]
@@ -109,7 +129,14 @@ def ListUsers():
     return
 
 def DelUser():
-
+    '''
+    Function to delete a user
+    
+    Creates an SQLite3 connection to maindatabase.db file.
+    Asks for a username to delete.
+    Queries for all usersnames in the table User_List.
+    If input username matches any of the usernames from database, prompt to confirm deletion.
+    '''
     uname = str(input("Enter a Username to delete:"))
     conn = sqlite3.connect("Data/maindatabase.db")
     c = conn.cursor()
@@ -142,7 +169,9 @@ def DelUser():
     return
 
 def UserHandler():
-
+    '''
+    Function for User Menu
+    '''
     while(True):
         try:
             callclearscreen()

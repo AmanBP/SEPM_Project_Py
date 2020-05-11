@@ -4,6 +4,9 @@ from complainthandler import MakeComp
 from transhandler import TransHandler
 
 def AccountantMenu(CurrentUserName):
+    '''
+    Wrapper Function for Accountant Menu.
+    '''
     while(True):
         try:
             callclearscreen()

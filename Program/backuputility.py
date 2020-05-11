@@ -3,6 +3,11 @@ import os
 from utilityfuncs import MenuHeaderPrinter,callpause,callclearscreen
 
 def Backup():
+    '''
+    Barely functioning Backup Function.
+
+    Works on Windows and Linux, as of commits on 12/05/2020
+    '''
     callclearscreen()
     MenuHeaderPrinter("Backup")
     loc = input("Enter a folder to backup the Data folder:")

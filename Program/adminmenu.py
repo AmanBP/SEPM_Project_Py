@@ -9,6 +9,10 @@ from utilityfuncs import *
 import os
 
 def AdminMenu(CurrentUserName):
+    '''
+    Wrapper Function for the Admin Menu
+    CurrentUserName is a string holding the de-encrypted username value.
+    '''
     while(True):
         try:
             callclearscreen()
