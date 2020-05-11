@@ -1,4 +1,4 @@
-from utilityfuncs import callclearscreen,callpause,MenuHeaderPrinter
+from utilityfuncs import *
 import sqlite3
 from prettytable import from_db_cursor
 
@@ -51,30 +51,40 @@ def DeleteAComp():
 
 def ComplaintHandler():
 
-    breakcomplaintloop = 1
-    while(breakcomplaintloop):
-        callclearscreen()
-        MenuHeaderPrinter("Complaints/Suggestion Menu")
-        print("1. Add a complaint or suggestion")
-        print("2. View all complaints and suggestions")
-        print("3. Delete a suggestion or complaint")
-        print("4. Go Back")
-        choice = int(input("Choose an option:"))
+    while(True):
+        try:
+            callclearscreen()
+            MenuHeaderPrinter("Complaints/Suggestion Menu")
+            print("1. Add a complaint or suggestion")
+            print("2. View all complaints and suggestions")
+            print("3. Delete a suggestion or complaint")
+            print("4. Go Back")
+            choice = int(input("Choose an option:"))
 
-        if(choice == 1):
-            MakeComp()
-            
-        elif(choice == 2):
-            ViewAllComp()
+            if(choice == 1):
+                MakeComp()
 
-        elif(choice == 3):
-            DeleteAComp()
+            elif(choice == 2):
+                ViewAllComp()
+
+            elif(choice == 3):
+                DeleteAComp()
+
+            elif(choice == 4):
+                raise BreakMenu
+
+            else:
+                raise WrongChoiceError
+
+        except ValueError:
+            print("Invalid Character has been entered!")
+            callpause()
         
-        elif(choice == 4):
-            breakcomplaintloop = 0
+        except BreakMenu:
+            break
         
-        else:
-            print("Wrong Choice, Please choose a correct option:")
+        except WrongChoiceError:
+            print("Wrong Choice, Please choose a correct option!")
             callpause()
             
     return
