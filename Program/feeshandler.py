@@ -3,7 +3,9 @@ from ratehandler import VRates
 from transhandler import EnterFunds
 
 def FeesHandler(uid):
-
+    '''
+    Wrapper Function for Fees Handling.
+    '''
     while(True):
         try:
             callclearscreen()

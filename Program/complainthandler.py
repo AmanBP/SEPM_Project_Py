@@ -3,6 +3,9 @@ import sqlite3
 from prettytable import from_db_cursor
 
 def MakeComp():
+    '''
+    Function to enter a complaint into a database.
+    '''
     cs = str(input("Please enter your complaint or suggestion:"))
     conn = sqlite3.connect("Data/maindatabase.db")
     c = conn.cursor()
@@ -13,6 +16,12 @@ def MakeComp():
     callpause()
 
 def ViewAllComp():
+    '''
+    Funtion to View all complaints.
+
+    Complaints are read from the table called "CS".
+
+    '''
     statement = "SELECT * FROM CS"
     conn = sqlite3.connect("Data/maindatabase.db")
     c = conn.cursor()
@@ -25,6 +34,12 @@ def ViewAllComp():
     callpause()
 
 def DeleteAComp():
+    '''
+    Function to delete a complaint.
+
+    ID in CS table is an auto-incrementing integer, one of SQL's features.
+    Hence, no random ID is generated.
+    '''
     ViewAllComp()
     conn = sqlite3.connect("Data/maindatabase.db")
     c = conn.cursor()
@@ -50,7 +65,9 @@ def DeleteAComp():
 
 
 def ComplaintHandler():
-
+    '''
+    Wrapper fuction to manage complaints.
+    '''
     while(True):
         try:
             callclearscreen()

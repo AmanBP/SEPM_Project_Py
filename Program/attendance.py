@@ -2,7 +2,27 @@ from utilityfuncs import *
 import sqlite3
 from prettytable import from_db_cursor
 
+"""
+    Attendance Implementation:
+
+        Create a table with name "name_<Formatted Date>"
+            <Formatted Date> is a date as a string in the format : "DDMMYYYY"
+        Basically, all attendances of 21/03/2020 will be stored in a table called "date_21032020".
+
+    Bugs:
+        All dates must be in the format of: DDMMYYYY, for this implementation to work.
+"""
+
 def getproperdate(somedatestring):
+    '''
+    Function to return a proper date.
+    somedatestring is a string input of the date, may or may not contain punctuation.
+
+    Returns a string of numbers without punctiontion, eg:
+        21/03/2020 -> 21032020.
+    Bugs:
+        Leading Zeros are not removed, may cause error in my attendance implementation.
+    '''
     bad_chars = ['-','_','\\','/']
     newdate = ""
     for i in somedatestring:
@@ -11,6 +31,14 @@ def getproperdate(somedatestring):
     return newdate
 
 def AttendanceCheck(uid):
+    '''
+    Function to print all attendance entries of a person.
+    uid is the username of whose attendance is being checked, It must be verified that it exists before this function is run.
+
+    Function creates a list of tables who are named as date_DDMMYYYY
+    Then Queries each of the dates for attendance of uid.
+    Creates a prettytable table using the data obtained and prints the final attendance.  
+    '''
     conn = sqlite3.connect("Data/maindatabase.db")
     c = conn.cursor()
     datelist = []
@@ -29,6 +57,12 @@ def AttendanceCheck(uid):
     callpause()
     
 def createdatetable(date):
+    '''
+    Function to create a date table.
+    date is an unformatted date string.
+
+    It must be confirmed that the date specified must not exist in the database, before this function is run.
+    '''
     properdate = getproperdate(date)
     command = "CREATE TABLE date_" + properdate + "(ID varchar(100),Attendance CHARACTER(1));"
     conn = sqlite3.connect("Data/maindatabase.db")
@@ -39,6 +73,14 @@ def createdatetable(date):
     conn.close()
 
 def insertintodatetable(date,id,pora):
+    '''
+    Function to enter attendance inta a date table
+    date is an unformatted date string.
+    id is the username
+    pora is a character with either 'P' or 'A', representing Present and Absent.
+
+    It must be confirmed that the date specified must exist in the database, before this function is run.
+    '''
     properdate = getproperdate(date)
     command = "INSERT INTO date_" + properdate + " VALUES(\"" + str(id) + "\",\"" + str(pora) + "\");"
     conn = sqlite3.connect("Data/maindatabase.db")
@@ -49,6 +91,12 @@ def insertintodatetable(date,id,pora):
     conn.close()
 
 def checkifdatetableexists(date):
+    '''
+    Function to check if a date table exists.
+
+    Returns 0 if date table is not found.
+    Returns 1 if date table is found.
+    '''
     properdate = getproperdate(date)
     command = "SELECT count(*) FROM sqlite_master WHERE type='table' AND name='date_" + properdate + "';"
     conn = sqlite3.connect("Data/maindatabase.db")
@@ -62,6 +110,11 @@ def checkifdatetableexists(date):
         return 1
 
 def getattendanceofdate(date):
+    '''
+    Function to print all attendancce entries of a particular date.
+
+    Creates and prints a table using prettytables table from sqlite3 cursor api.
+    '''
     properdate = getproperdate(date)
     command = "SELECT * FROM date_" + properdate + ";"
     conn = sqlite3.connect("Data/maindatabase.db")
@@ -73,6 +126,9 @@ def getattendanceofdate(date):
     conn.close()
     
 def AttendanceHandler():
+    '''
+    Wrapper function for the Attendance Menu
+    '''
     while(True):
         try:
             callclearscreen()

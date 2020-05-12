@@ -4,10 +4,20 @@ import sqlite3
 import prettytable as pt
 
 def GetCurrentTime():
+    '''
+    Function for getting current system time.
+
+    Function returns a string formatted in the format "HH:MM:SS , DD/MM/YYYY"
+    '''
     now = datetime.now()
     return now.strftime("%H:%M:%S , %d/%m/%Y")
 
 def EnterintoLogs(values):
+    '''
+    Function that creates entries for a transaction loc.
+    values is a tuple containing 5 data members:
+        (username,transaction type,value/amount,transaction time,comment)
+    '''
     conn = sqlite3.connect("Data/maindatabase.db")
     c = conn.cursor()
     c.execute('''INSERT INTO Transaction_Log VALUES(?,?,?,?,?)''',values)
@@ -15,6 +25,13 @@ def EnterintoLogs(values):
     conn.close()
 
 def EnterFunds(uid):
+    '''
+    Function to "Deposit Funds"
+    uid is a string containing the de-encrypted username string.
+
+    Simply asks and adds the amount to the table.
+    Creates a log once done.
+    '''
     print("Current User:",uid)
     value = int(input("Enter the amount you want to add: "))
     print("Entering amount:",value,"to the database.")
@@ -27,6 +44,17 @@ def EnterFunds(uid):
     callpause()
 
 def TakeFunds(uid):
+    '''
+    Function to "Withdraw Funds"
+    uid is a string holding a de-encrypted username string.
+
+    Uses ViewFunds in mode = 2 to get the current balance.
+    Asks for a valeu to deduct if balance is not 0.
+    If Balance is 0, it returns after giving a suitable statement.
+    Else, it will keep asking a value to deduct, untill a proper value is given.
+    (Note: Doesn't allow cancellation of this loop(for now).)
+    Creates a log once done.
+    '''
     print("Current User:",uid)
     gotpropervalue = 0
     balance = ViewFunds(2)
@@ -53,6 +81,11 @@ def TakeFunds(uid):
     callpause()
 
 def TransLogs():
+    '''
+    Function that prints all the Transaction logs found in the table Transaction_Log.
+
+    Creates a table using pretty table and prints that table.
+    '''
     print("Current Transaction Logs are:")
     conn = sqlite3.connect("Data/maindatabase.db")
     c = conn.cursor()
@@ -62,6 +95,21 @@ def TransLogs():
     callpause()
 
 def ViewFunds(mode):
+    '''
+    Function to see current balance
+    Mode is an integer
+
+    Builds the final balance value, using transaction types.
+    Starts counting balance from 0.
+    Queries the maindatabase.db file and extracts all transaction value and their type.
+    For a withdrwal, balance is deducted by the value.
+    For a deposit, balance is incremented by that value.
+    
+    If mode = 1:
+        It functions as a current balance printer.
+    else:
+        It returns the value of balance.
+    '''
     conn = sqlite3.connect("Data/maindatabase.db")
     c = conn.cursor()
     balance = 0
@@ -79,7 +127,12 @@ def ViewFunds(mode):
         return balance
 
 def TransHandler(uid):
+    '''
+    Transaction Wrapper Function
 
+    uid is a string having a decrypted username, it is passed onto the transact functions as per needed.
+    Value of uid is used to log usernames in a transaction.
+    '''
     while(True):
         try:
             callclearscreen()

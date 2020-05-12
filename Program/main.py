@@ -13,7 +13,11 @@ import getpass
 import time
 
 def main():
+    '''
+    Main Function.
 
+    Responsible for login and then to divert a user into their correct usermenu.
+    '''
     while(True):
         try:
             callclearscreen()

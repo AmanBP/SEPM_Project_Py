@@ -3,6 +3,11 @@ from utilityfuncs import *
 from prettytable import from_db_cursor
 
 def VRates():
+    '''
+    Function to view rates.
+
+    Loads rate values from the database file into a prettytable object and prints the prettytable table so formed.
+    '''
     print("Current Rates are:\n")
     sections = ["Membership_Fees","Gym_Trainer_Fees","Dietician_Fees"]
     columns = "Monthly,QuadAnnual,BiAnnual,Annual"
@@ -21,6 +26,11 @@ def VRates():
     return
 
 def CRates():
+    '''
+    Function to change the rates.
+
+    Uses View Rates Function to show the rates, then asks which rate to edit.
+    '''
     VRates()
     gotcorrectnum = 0
     choice = 9000
@@ -65,6 +75,9 @@ def CRates():
     return
 
 def RateHandler():
+    '''
+    Wrapper Function for Rate Menu.
+    '''
     while(True):
         try:
             callclearscreen()
